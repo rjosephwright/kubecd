@@ -1,0 +1,50 @@
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: kubecd-secrets
+data:
+  erlang_cookie: {{erlang_cookie}}
+---
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  name: kubecd
+  labels:
+    app: kubecd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kubecd
+  template:
+    metadata:
+      name: kubecd
+      creationTimestamp: 
+      labels:
+        app: kubecd
+    spec:
+      containers:
+      - name: kubecd
+        image: us.gcr.io/cloudboss-dev-180101/kubecd:13
+        env:
+        - name: ERLANG_COOKIE
+          valueFrom:
+            secretKeyRef:
+              name: kubecd-secrets
+              key: erlang_cookie
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kubecd
+  labels:
+    app: kubecd
+spec:
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 4001
+  selector:
+    app: kubecd
+  type: LoadBalancer
