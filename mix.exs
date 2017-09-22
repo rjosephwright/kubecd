@@ -24,6 +24,7 @@ defmodule Kubecd.Mixfile do
       {:distillery, "~> 1.4", runtime: false},
       {:plug, "~> 1.4"},
       {:poison, "~> 3.1"},
+      {:httpoison, "~> 0.13"},
     ]
   end
 end
