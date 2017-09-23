@@ -28,6 +28,9 @@ defmodule Kubecd.Kubernetes do
   end
 
   def process_response_body(body) do
-    Poison.decode! body
+    case Poison.decode body do
+      {:ok, parsed} -> parsed
+      {:error, _} -> body
+    end
   end
 end
