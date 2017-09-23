@@ -12,7 +12,7 @@ defmodule Kubecd.Kubernetes do
 
   def ssl_options() do
     {:ssl, [{:cacertfile, "#{@secrets}/ca.crt"},
-           {:server_name_indication, :disable}]}
+            {:server_name_indication, :disable}]}
   end
 
   def process_url(url) do
