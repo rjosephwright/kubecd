@@ -25,6 +25,7 @@ defmodule Kubecd.Mixfile do
       {:plug, "~> 1.4"},
       {:poison, "~> 3.1"},
       {:httpoison, "~> 0.13"},
+      {:uuid, "~> 1.1"},
     ]
   end
 end
