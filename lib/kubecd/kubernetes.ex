@@ -1,8 +1,6 @@
 defmodule Kubecd.Kubernetes do
   use HTTPoison.Base
 
-  @kubernetes System.get_env "KUBERNETES_SERVICE_HOST"
-  @endpoint "https://#{@kubernetes}"
   @secrets "/var/run/secrets/kubernetes.io/serviceaccount"
 
   def auth_header() do
@@ -16,7 +14,8 @@ defmodule Kubecd.Kubernetes do
   end
 
   def process_url(url) do
-    URI.to_string(URI.merge(@endpoint, url))
+    k8s = System.get_env "KUBERNETES_SERVICE_HOST"
+    URI.to_string(URI.merge("https://#{k8s}", url))
   end
 
   def process_request_headers(headers) do
