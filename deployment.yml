@@ -28,6 +28,8 @@ spec:
       - name: kubecd
         image: us.gcr.io/cloudboss-dev-180101/kubecd:13
         env:
+        - name: EXTERNAL_URL
+          value: {{external_url}}
         - name: ERLANG_COOKIE
           valueFrom:
             secretKeyRef:
