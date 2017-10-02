@@ -1,0 +1,4 @@
+-name <%= release_name %>@${POD_IP}
+-setcookie ${ERLANG_COOKIE}
+-smp auto
+-kernel inet_dist_listen_min ${LISTEN_DIST_MIN} inet_dist_listen_max ${LISTEN_DIST_MAX}

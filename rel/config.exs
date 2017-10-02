@@ -16,6 +16,9 @@ environment :prod do
   set include_erts: true
   set include_src: false
   set cookie: :"${ERLANG_COOKIE}"
+  set overlays: [
+    {:template, "rel/templates/vm.args.eex", "releases/<%= release_version %>/vm.args"}
+  ]
 end
 
 release :kubecd do

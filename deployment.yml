@@ -13,7 +13,7 @@ metadata:
   labels:
     app: kubecd
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: kubecd
@@ -29,12 +29,18 @@ spec:
         image: us.gcr.io/cloudboss-dev-180101/kubecd:13
         env:
         - name: EXTERNAL_URL
-          value: {{external_url}}
+          value: http://35.185.20.138
+        - name: POD_IP
+          valueFrom:
+            fieldRef:
+              fieldPath: status.podIP
         - name: ERLANG_COOKIE
           valueFrom:
             secretKeyRef:
               name: kubecd-secrets
               key: erlang_cookie
+        ports:
+        - containerPort: 4369
 ---
 kind: Service
 apiVersion: v1
